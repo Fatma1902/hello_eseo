@@ -7,6 +7,7 @@ fun convertirEnListe(chaine: String, separateur: String = " "): List<String> {
     return chaine.split(separateur).filter { it.isNotEmpty() }
 }
 
+
 fun main(args: Array<String>) {
     when (args.size) {
         0 -> {
