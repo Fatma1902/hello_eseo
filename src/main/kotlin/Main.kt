@@ -7,7 +7,6 @@ fun convertirEnListe(chaine: String, separateur: String = " "): List<String> {
     return chaine.split(separateur).filter { it.isNotEmpty() }
 }
 
-
 fun main(args: Array<String>) {
     when (args.size) {
         0 -> {
@@ -19,8 +18,7 @@ fun main(args: Array<String>) {
                     println("Au revoir !")
                     break
                 }
-                val liste = convertirEnListe(input ?: "")
-                println("Liste obtenue : $liste")
+                traiterTexte(input ?: "")
             }
         }
         1 -> {
@@ -35,8 +33,7 @@ fun main(args: Array<String>) {
                 val contenu = file.readText()
                 println("Contenu du fichier \"$filePath\" :")
                 println(contenu)
-                val liste = convertirEnListe(contenu)
-                println("Liste obtenue à partir du contenu : $liste")
+                traiterTexte(contenu)
             } catch (e: Exception) {
                 println("Erreur : Impossible de lire le fichier \"$filePath\".")
                 println("Détails : ${e.message}")
@@ -47,6 +44,14 @@ fun main(args: Array<String>) {
             afficherAide()
         }
     }
+}
+
+fun traiterTexte(texte: String) {
+    val lexer = Lexer(texte)
+    val tokens = lexer.scanTokens()
+
+    println("Tokens générés :")
+    tokens.forEach { println(it) }
 }
 
 fun afficherAide() {
