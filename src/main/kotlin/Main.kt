@@ -1,5 +1,12 @@
 import java.io.File
 
+fun convertirEnListe(chaine: String, separateur: String = " "): List<String> {
+    if (chaine.isBlank()) {
+        return emptyList()
+    }
+    return chaine.split(separateur).filter { it.isNotEmpty() }
+}
+
 fun main(args: Array<String>) {
     when (args.size) {
         0 -> {
@@ -11,18 +18,26 @@ fun main(args: Array<String>) {
                     println("Au revoir !")
                     break
                 }
-                println("Vous avez entré : $input")
+                val liste = convertirEnListe(input ?: "")
+                println("Liste obtenue : $liste")
             }
         }
         1 -> {
             // Un seul argument, lire le fichier spécifié
-            val fileName = args[0]
+            val filePath = args[0]
             try {
-                val content = File(fileName).readText()
-                println("Contenu du fichier \"$fileName\" :")
-                println(content)
+                val file = File(filePath)
+                if (!file.exists()) {
+                    println("Erreur : Le fichier \"$filePath\" n'existe pas.")
+                    return
+                }
+                val contenu = file.readText()
+                println("Contenu du fichier \"$filePath\" :")
+                println(contenu)
+                val liste = convertirEnListe(contenu)
+                println("Liste obtenue à partir du contenu : $liste")
             } catch (e: Exception) {
-                println("Erreur : Impossible de lire le fichier \"$fileName\".")
+                println("Erreur : Impossible de lire le fichier \"$filePath\".")
                 println("Détails : ${e.message}")
             }
         }
