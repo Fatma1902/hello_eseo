@@ -45,6 +45,7 @@ class Lexer(private val source: String) {
             '+' -> addToken(TokenType.PLUS)
             ';' -> addToken(TokenType.SEMICOLON)
             '*' -> addToken(TokenType.STAR)
+            '/' -> tokens.add(Token(TokenType.SLASH, "/", null, 1))
 
             // Opérateurs logiques et comparateurs
             '!' -> addToken(if (match('=')) TokenType.BANG_EQUAL else TokenType.BANG)
